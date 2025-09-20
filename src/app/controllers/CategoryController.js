@@ -22,6 +22,8 @@ class CategoryController {
         return res.status(401).json()
       }
 
+      const { filename: path } = req.file
+
       const { name } = req.body
 
       const existingCategory = await Category.findOne({
@@ -34,6 +36,7 @@ class CategoryController {
       }
       const { id } = await Category.create({
         name,
+        path,
       })
 
       return res.json({ name, id })
