@@ -1,7 +1,9 @@
 import react from "react"
-import {useForm} from "react-hook-form"
-import {yupResolver} from "@hookform/resolvers/yup"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+
+import api from "../../services/api"
 
 import LoginImg from "../../assets/login-image.svg"
 import Logo from "../../assets/logo.svg"
@@ -34,12 +36,18 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = data => console.log(data)
+  const onSubmit = async clientData => {
+    const response = await api.post("sessions", {
+      email: clientData.email,
+      password: clientData.password,
+    })
+    console.log(response)
+  }
 
   return (
     <Container>
