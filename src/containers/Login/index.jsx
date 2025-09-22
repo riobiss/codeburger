@@ -2,7 +2,7 @@ import react from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-
+import { toast } from "react-toastify"
 import api from "../../services/api"
 
 import LoginImg from "../../assets/login-image.svg"
@@ -42,10 +42,23 @@ export default function Login() {
   })
 
   const onSubmit = async clientData => {
-    const response = await api.post("sessions", {
-      email: clientData.email,
-      password: clientData.password,
-    })
+    try {
+      const response = await toast.promise(
+        api.post("sessions", {
+          email: clientData.email,
+          password: clientData.password,
+        }),
+        {
+          pending: "Verificando seus dados",
+          success: "Seja bem-vindo(a)",
+          error: "Verifique seu e-mail e senha",
+        }
+      )
+    } catch (err) {
+      if (err.response?.status !== 401) {
+        console.error("Erro inesperado:", err)
+      }
+    }
   }
 
   return (
@@ -66,10 +79,15 @@ export default function Login() {
           <Input
             type="password"
             {...register("password")}
-            $error={!!errors.password ?.message}
+            $error={!!errors.password?.message}
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
-          <Button type="submit" style={{marginTop: "75px", marginBottom: "25px"}}>Sign in</Button>
+          <Button
+            type="submit"
+            style={{ marginTop: "75px", marginBottom: "25px" }}
+          >
+            Sign in
+          </Button>
         </form>
         <SignInLink>
           Não possui conta? <a>Sign Up</a>
