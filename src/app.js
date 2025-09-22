@@ -2,6 +2,7 @@ import express from "express"
 import routes from "./routes.js" // lembre-se do .js no ESM
 import { resolve, dirname } from "path"
 import { fileURLToPath } from "url"
+import cors from "cors"
 import "./database/index.js"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -10,6 +11,7 @@ const __dirname = dirname(__filename)
 class App {
   constructor() {
     this.app = express()
+    this.app.use(cors())
 
     this.middlewares()
     this.routes()
