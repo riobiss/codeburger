@@ -8,28 +8,28 @@ import api from "../../services/api"
 import LoginImg from "../../assets/login-image.svg"
 import Logo from "../../assets/logo.svg"
 
+import Button from "../../components/Button/index.jsx"
 import {
   Container,
   LoginImage,
   ContainerItens,
   Label,
   Input,
-  Button,
   SignInLink,
   ErrorMessage,
-} from "./styles"
+} from "./styles.js"
 
 export default function Login() {
   const schema = yup
     .object({
       email: yup
         .string()
-        .email("Digite um email válido")
-        .required("O e-mail é obrigatório"),
+        .email("Email inválido")
+        .required("Email é obrigatório"),
       password: yup
         .string()
-        .required("a senha é obrigatório")
-        .min(8, "À senha deve ter no mínimo 8 dígitos"),
+        .required("Senha é obrigatória")
+        .min(8, "Senha deve ter pelo menos 8 caracteres"),
     })
     .required()
 
@@ -46,7 +46,6 @@ export default function Login() {
       email: clientData.email,
       password: clientData.password,
     })
-    console.log(response)
   }
 
   return (
@@ -60,17 +59,17 @@ export default function Login() {
           <Input
             type="email"
             {...register("email")}
-            error={errors.email?.message}
+            $error={!!errors.email?.message}
           />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
           <Label>Senha</Label>
           <Input
             type="password"
             {...register("password")}
-            error={errors.password?.message}
+            $error={!!errors.password ?.message}
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
-          <Button type="submit">Sign in</Button>
+          <Button type="submit" style={{marginTop: "75px", marginBottom: "25px"}}>Sign in</Button>
         </form>
         <SignInLink>
           Não possui conta? <a>Sign Up</a>
