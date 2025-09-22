@@ -11,5 +11,3 @@ root.render(
     <GlobalStyles />
   </>
 )
-
-const ola = 1
