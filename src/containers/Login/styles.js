@@ -32,6 +32,10 @@ justify-content: center;
     color: white;
     margin-top: 100px;
  }
+ form {
+    display: flex;
+    flex-direction: column;
+ }
 `
 
 export const Label = styled.p`
@@ -51,7 +55,7 @@ height: 38.32px;
 background-color: white;
 box-shadow: 3px 3px 10px rgba(74, 144, 226, 0.19);
 border-radius: 5px;
-border: none;
+border: ${props => props.error ? "2px solid #cc1717" : "none"} ;
 text-indent: 10px;
 `
 
@@ -90,4 +94,13 @@ a {
     cursor: pointer;
  text-decoration: underline;
 }
+`
+export const ErrorMessage = styled.p`
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+
+color: #cc1717;
+
 `
