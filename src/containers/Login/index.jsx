@@ -1,6 +1,7 @@
 import React from "react"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
+import {Link} from "react-router-dom"
 import * as yup from "yup"
 import {toast} from "react-toastify"
 import api from "../../services/api"
@@ -95,7 +96,10 @@ export default function Login() {
           </Button>
         </form>
         <SignInLink>
-          Não possui conta? <a>Sign Up</a>
+          Não possui conta?{" "}
+          <Link style={{color: "white"}} to="/cadastro">
+            Sign Up
+          </Link>
         </SignInLink>
       </ContainerItens>
     </Container>

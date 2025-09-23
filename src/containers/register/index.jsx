@@ -1,8 +1,9 @@
 import react from "react"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
+import {useForm} from "react-hook-form"
+import {yupResolver} from "@hookform/resolvers/yup"
 import * as Yup from "yup"
-import { toast } from "react-toastify"
+import {toast} from "react-toastify"
+import {Link} from "react-router-dom"
 
 import api from "../../services/api.js"
 
@@ -36,21 +37,21 @@ export default function Register() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm({
     resolver: yupResolver(schema),
   })
 
   const onSubmit = async clientData => {
     try {
-      const { status } = await api.post(
+      const {status} = await api.post(
         "users",
         {
           name: clientData.name,
           email: clientData.email,
           password: clientData.password,
         },
-        { validateStatus: () => true }
+        {validateStatus: () => true}
       )
       if (status === 201 || status === 200) {
         toast.success("Cadastrado com sucesso", {})
@@ -103,13 +104,14 @@ export default function Register() {
           <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
           <Button
             type="submit"
-            style={{ marginTop: "25px", marginBottom: "25px" }}
+            style={{marginTop: "25px", marginBottom: "25px"}}
           >
             Sign Up
           </Button>
         </form>
         <SignInLink>
-          Já possui conta? <a>Sign In</a>
+          Já possui conta? {" "}
+          <Link to={"/login"} style={{color: "white"}}>Sign In</Link>
         </SignInLink>
       </ContainerItens>
     </Container>
