@@ -9,6 +9,6 @@ export default {
   },
 
   async down(queryInterface) {
-    await queryInterface.removeColumn("categories")
+    await queryInterface.removeColumn("categories", "path")
   },
 }
