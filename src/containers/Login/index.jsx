@@ -1,9 +1,10 @@
-import react from "react"
+import React from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { toast } from "react-toastify"
 import api from "../../services/api"
+import { useUser } from "../../hooks/UserContext.jsx"
 
 import LoginImg from "../../assets/login-image.svg"
 import Logo from "../../assets/logo.svg"
@@ -20,8 +21,9 @@ import {
 } from "./styles.js"
 
 export default function Login() {
+  const { putUserData, userData } = useUser()
   const schema = yup
-    .object({
+    .object().shape({
       email: yup
         .string()
         .email("Email inválido")
@@ -43,7 +45,7 @@ export default function Login() {
 
   const onSubmit = async clientData => {
     try {
-      const response = await toast.promise(
+      const { data } = await toast.promise(
         api.post("sessions", {
           email: clientData.email,
           password: clientData.password,
@@ -54,6 +56,9 @@ export default function Login() {
           error: "Verifique seu e-mail e senha",
         }
       )
+
+      putUserData(data)
+      console.log(userData)
     } catch (err) {
       if (err.response?.status !== 401) {
         console.error("Erro inesperado:", err)

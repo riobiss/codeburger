@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 import { ContainerButton } from "./styles"
 
 function Button( {children, ...rest} ) {
