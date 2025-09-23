@@ -1,7 +1,7 @@
 import React from "react"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import * as yup from "yup"
 import {toast} from "react-toastify"
 import api from "../../services/api"
@@ -22,6 +22,8 @@ import {
 } from "./styles.jsx"
 
 export default function Login() {
+  const navigate = useNavigate()
+
   const {putUserData} = useUser()
   const schema = yup
     .object()
@@ -60,6 +62,10 @@ export default function Login() {
       )
 
       putUserData(data)
+
+      setTimeout(() => {
+        navigate("/")
+      }, 1000)
     } catch (err) {
       if (err.response?.status !== 401) {
         console.error("Erro inesperado:", err)
