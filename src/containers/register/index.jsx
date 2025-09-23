@@ -19,7 +19,7 @@ import {
   Input,
   SignInLink,
   ErrorMessage,
-} from "./styles.js"
+} from "./styles.jsx"
 
 export default function Register() {
   const schema = Yup.object({
@@ -110,8 +110,10 @@ export default function Register() {
           </Button>
         </form>
         <SignInLink>
-          Já possui conta? {" "}
-          <Link to={"/login"} style={{color: "white"}}>Sign In</Link>
+          Já possui conta?{" "}
+          <Link to={"/login"} style={{color: "white"}}>
+            Sign In
+          </Link>
         </SignInLink>
       </ContainerItens>
     </Container>

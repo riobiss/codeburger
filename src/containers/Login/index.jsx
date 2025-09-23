@@ -19,7 +19,7 @@ import {
   Input,
   SignInLink,
   ErrorMessage,
-} from "./styles.js"
+} from "./styles.jsx"
 
 export default function Login() {
   const {putUserData} = useUser()
