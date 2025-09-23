@@ -3,13 +3,23 @@ import {Routes, Route, BrowserRouter as Router} from "react-router-dom"
 
 import Login from "../containers/Login/index.jsx"
 import Register from "../containers/register/index.jsx"
+import Home from "../containers/home/index.jsx"
+import PrivateRoute from "./private-route.jsx"
 
 export default function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route element={<Login/> } path="/login" />
-        <Route element={<Register/>} path="/cadastro" />
+        <Route path="/login" element={<Login />} />
+        <Route path="/cadastro" element={<Register />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   )
