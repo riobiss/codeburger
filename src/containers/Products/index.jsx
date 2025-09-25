@@ -7,20 +7,35 @@ import {
   ProductImg,
   CategoryButton,
   CategoriesMenu,
+  ProductsContainer,
 } from "./styles.jsx"
+import CardProducts from "../../components/CardProducts/index.jsx"
+import { formatCurrency } from "../../utils/formatCurrency.js"
 
 export default function Products() {
   const [categories, setCategories] = useState([])
+  const [products, setProducts] = useState([])
   const [activeCategory, setActiveCategory] = useState(0)
 
   useEffect(() => {
     async function LoadCategories() {
       const {data} = await api.get("categories")
+
       const newCategories = [{id: 0, name: "Todos"}, ...data]
       setCategories(newCategories)
     }
 
+    async function LoadProducts() {
+      const {data} = await api.get("products")
+
+      const newAllproducts = data.map(product => {
+        return {...product, formatedPrice: formatCurrency(product.price)}
+      })
+
+      setProducts(newAllproducts)
+    }
     LoadCategories()
+    LoadProducts()
   }, [])
 
   return (
@@ -43,6 +58,11 @@ export default function Products() {
             )
           })}
       </CategoriesMenu>
+      <ProductsContainer>
+        {products.map(product => {
+          return <CardProducts key={product.id} product={product} />
+        })}
+      </ProductsContainer>
     </Container>
   )
 }
