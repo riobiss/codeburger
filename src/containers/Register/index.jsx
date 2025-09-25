@@ -10,7 +10,7 @@ import api from "../../services/api.js"
 import RegisterImg from "../../assets/resgister-img.svg"
 import Logo from "../../assets/logo.svg"
 
-import Button from "../../components/Button/index.jsx"
+import {Button} from "../../components/index.js"
 import {
   Container,
   RegisterImage,
@@ -21,7 +21,7 @@ import {
   ErrorMessage,
 } from "./styles.jsx"
 
-export default function Register() {
+export function Register() {
   const schema = Yup.object({
     name: Yup.string().required("Nome é obrigatório"),
     email: Yup.string().email("Email inválido").required("Email é obrigatório"),

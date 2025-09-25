@@ -1,9 +1,9 @@
 import React from "react"
 
 import {Container, Image, ProductName, ProductPrice} from "./styles"
-import Button from "../Button/index"
+import {Button} from "../index.js"
 
-export default function CardProducts({product}) {
+export function CardProducts({product}) {
   return (
     <Container>
       <Image src={product.url} />

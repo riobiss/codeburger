@@ -10,7 +10,8 @@ import {useUser} from "../../hooks/UserContext.jsx"
 import LoginImg from "../../assets/login-image.svg"
 import Logo from "../../assets/logo.svg"
 
-import Button from "../../components/Button/index.jsx"
+import {Button} from "../../components/index.js"
+
 import {
   Container,
   LoginImage,
@@ -21,7 +22,7 @@ import {
   ErrorMessage,
 } from "./styles.jsx"
 
-export default function Login() {
+export function Login() {
   const navigate = useNavigate()
 
   const {putUserData} = useUser()

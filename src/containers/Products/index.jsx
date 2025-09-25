@@ -9,10 +9,10 @@ import {
   CategoriesMenu,
   ProductsContainer,
 } from "./styles.jsx"
-import CardProducts from "../../components/CardProducts/index.jsx"
+import {CardProducts} from "../../components/index.js"
 import {formatCurrency} from "../../utils/formatCurrency.js"
 
-export default function Products() {
+export  function Products() {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
