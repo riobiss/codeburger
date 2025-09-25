@@ -1,35 +1,61 @@
 import React, {useEffect, useState} from "react"
-import Carousel from "react-elastic-carousel"
+import {useKeenSlider} from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
 import CategoryLogo from "../../assets/categories-img.svg"
-import {Container, CategoryImg,ContainerItems, Image, Button} from "./styles.jsx"
-import api from "../../services/api"
+import {
+  Container,
+  CategoryImg,
+  ContainerItems,
+  Image,
+  Carousel,
+  Button,
+} from "./styles.jsx"
+import api from "../../services/api.js"
 
-export default function Home() {
+export function CategoryCarousel() {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    async function LoadCategories() {
-      const {data} = await api.get("categories")
-      setCategories(data)
-    }
+    try {
+      async function LoadCategories() {
+        const {data} = await api.get("categories")
+        setCategories(data)
+      }
 
-    LoadCategories()
+      LoadCategories()
+    } catch (err) {
+      return console.log(err)
+    }
   }, [])
-  const breakPoints = [
-    {witdh: 1, itemsToShow: 1},
-    {width: 400, itemsToShow: 2},
-    {width: 600, itemsToShow: 3},
-    {width: 900, itemsToShow: 4},
-    {width: 1300, itemsToShow: 5},
-  ]
+
+  const [sliderRef] = useKeenSlider({
+    breakpoints: {
+      "(min-width: 1px)": {
+        slides: {perView: 1, spacing: 5},
+      },
+      "(min-width: 400px)": {
+        slides: {perView: 2, spacing: 10},
+      },
+      "(min-width: 600px)": {
+        slides: {perView: 3, spacing: 20},
+      },
+      "(min-width: 900px)": {
+        slides: {perView: 4, spacing: 40},
+      },
+      "(min-width: 1300px)": {
+        slides: {perView: 5, spacing: 50},
+      },
+    },
+    slides: {perView: 2},
+  })
 
   return (
     <Container>
-      <CategoryImg src={CategoryLogo} alt="Logo do Home" />
-      <Carousel itemsToShow={4} style={{width: "90%"}} breakPoints={breakPoints}>
+      <CategoryImg src={CategoryLogo} alt="Logo das Categorias" />
+      <Carousel ref={sliderRef} className="keen-slider">
         {categories.map(category => {
           return (
-            <ContainerItems key={category.id}>
+            <ContainerItems className="keen-slider__slide" key={category.id}>
               <Image
                 src={category.url}
                 alt={"Imagem da categoria de " + category.name}

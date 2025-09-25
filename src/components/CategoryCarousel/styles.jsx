@@ -7,55 +7,52 @@ export const Container = styled.div`
   align-items: center;
   gap: 35px;
   padding: 35px 0;
+  .keen-slider{
 
-  .rec.rec-arrow {
-    background-color: #814b8f;
-    color: #efefef;
-    cursor: pointer;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-  }
+  width: 90%;
 
-  .rec.rec-arrow:hover {
-    background-color: #efefef;
-    color: #814b8f;
-    border: 2px solid #814b8f;
   }
-  .rec.rec-arrow:disabled {
-    background-color: #bebebf;
-    color: #efefef;
-    border: none;
-  }
+  .keen-slider-slide{
+  width: 200px; 
 
+  }
 `
 
 export const CategoryImg = styled.img`
   width: 50%;
 `
+export const Carousel = styled.div`
+  `
+
 export const ContainerItems = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 16px;
 `
 
 export const Image = styled.img`
-  width: 200px;
   border-radius: 10px;
+  
 `
+
 export const Button = styled.button`
   margin-top: 16px;
-  background: #814b8f;
+  background-color: #814b8f;
   border-radius: 8px;
   height: 50px;
   border: none;
-  font-style: normal;
   font-weight: bold;
   font-size: 18px;
   line-height: 100%;
   text-align: center;
   color: #ffffff;
   cursor: pointer;
+  transition: opacity 0.2s;
+
   &:hover {
     opacity: 0.8;
   }
+
   &:active {
     opacity: 0.6;
   }
