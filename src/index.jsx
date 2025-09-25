@@ -4,15 +4,15 @@ import { ToastContainer, toast } from "react-toastify"
 
 import AppRoutes from "./routes/routes"
 import GlobalStyles from "./styles/globalStyles"
-import { UserProvider } from "./hooks/UserContext"
+import AppProvider  from "./hooks/index"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
 root.render(
   <>
-  <UserProvider>
+  <AppProvider>
   <AppRoutes />
-  </UserProvider>
+  </AppProvider>
     <ToastContainer
       autoClose={2500}
       position="bottom-left"
