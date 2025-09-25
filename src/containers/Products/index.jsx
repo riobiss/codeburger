@@ -10,11 +10,12 @@ import {
   ProductsContainer,
 } from "./styles.jsx"
 import CardProducts from "../../components/CardProducts/index.jsx"
-import { formatCurrency } from "../../utils/formatCurrency.js"
+import {formatCurrency} from "../../utils/formatCurrency.js"
 
 export default function Products() {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
   const [activeCategory, setActiveCategory] = useState(0)
 
   useEffect(() => {
@@ -38,6 +39,18 @@ export default function Products() {
     LoadProducts()
   }, [])
 
+  useEffect(() => {
+    if (activeCategory === 0) {
+      setFilteredProducts(products)
+    } else {
+      const newFilteredProducts = products.filter(
+        product => product.category_id === activeCategory
+      )
+
+      setFilteredProducts(newFilteredProducts)
+    }
+  }, [activeCategory])
+
   return (
     <Container>
       <ProductImg src={ProductsLogo} alt="Logo do Home" />
@@ -59,7 +72,7 @@ export default function Products() {
           })}
       </CategoriesMenu>
       <ProductsContainer>
-        {products.map(product => {
+        {filteredProducts.map(product => {
           return <CardProducts key={product.id} product={product} />
         })}
       </ProductsContainer>
