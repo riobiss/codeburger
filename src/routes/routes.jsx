@@ -5,6 +5,7 @@ import Login from "../containers/Login/index.jsx"
 import Register from "../containers/register/index.jsx"
 import Home from "../containers/home/index.jsx"
 import PrivateRoute from "./private-route.jsx"
+import Products from "../containers/Products/index.jsx"
 
 export default function AppRoutes() {
   return (
@@ -17,6 +18,14 @@ export default function AppRoutes() {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/produtos"
+          element={
+            <PrivateRoute>
+              <Products />
             </PrivateRoute>
           }
         />
