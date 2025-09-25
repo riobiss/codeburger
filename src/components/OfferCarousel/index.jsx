@@ -21,7 +21,9 @@ export function OfferCarousel() {
       async function LoadOffers() {
         const {data} = await api.get("products")
 
-        const onlyOffers = data.filter(product => product.offer)
+        const onlyOffers = data.filter(product => product.offer).map(item => {
+          return {...item, formatedPrice: formatCurrency(item.price)}
+        })
         setOffers(onlyOffers)
       }
 
@@ -63,7 +65,7 @@ export function OfferCarousel() {
                 alt={"Imagem da " + product.name + " em oferta"}
               />
               <p>{product.name}</p>
-              <p>{product.price}</p>
+              <p>{/* formatCurrency(product.price) */product.formatedPrice}</p>
               <Button>Peça agora</Button>
             </ContainerItems>
           )
