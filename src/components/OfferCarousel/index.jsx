@@ -15,7 +15,6 @@ import api from "../../services/api.js"
 
 export function OfferCarousel() {
   const [offers, setOffers] = useState([])
-
   useEffect(() => {
     try {
       async function LoadOffers() {
@@ -35,22 +34,27 @@ export function OfferCarousel() {
   const [sliderRef] = useKeenSlider({
     breakpoints: {
       "(min-width: 1px)": {
-        slides: {perView: 1, spacing: 5},
+        slides: {origin: "center", perView: 1.5, spacing: 5},
       },
       "(min-width: 400px)": {
-        slides: {perView: 2, spacing: 10},
+        slides: {origin: "center", perView: 2.5, spacing: 10},
       },
       "(min-width: 600px)": {
-        slides: {perView: 3, spacing: 20},
+        slides: {origin: "center", perView: 3.5, spacing: 20},
       },
       "(min-width: 900px)": {
-        slides: {perView: 4, spacing: 40},
+        slides: {origin: "center", perView: 3.5, spacing: 40},
       },
       "(min-width: 1300px)": {
-        slides: {perView: 5, spacing: 50},
+        slides: {origin: "center", perView: 4, spacing: 50},
       },
     },
-    slides: {perView: 2},
+    loop: true,
+    mode: "snap",
+    range: {
+      min: -offers.length,
+      max: offers.length,
+    },
   })
 
   return (
