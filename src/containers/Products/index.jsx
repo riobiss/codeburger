@@ -49,7 +49,7 @@ export  function Products() {
 
       setFilteredProducts(newFilteredProducts)
     }
-  }, [activeCategory])
+  }, [activeCategory, products])
 
   return (
     <Container>
