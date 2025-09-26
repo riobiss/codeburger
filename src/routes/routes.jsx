@@ -1,7 +1,7 @@
 import React from "react"
 import {Routes, Route, BrowserRouter as Router} from "react-router-dom"
 
-import {Home, Login, Products, Register} from "../containers/index.js"
+import {Home, Login, Products, Register, Cart} from "../containers/index.js"
 import PrivateRoute from "./private-route.jsx"
 
 export default function AppRoutes() {
@@ -23,6 +23,14 @@ export default function AppRoutes() {
           element={
             <PrivateRoute>
               <Products />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/carrinho"
+          element={
+            <PrivateRoute>
+              <Cart />
             </PrivateRoute>
           }
         />
