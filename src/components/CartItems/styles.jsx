@@ -19,7 +19,7 @@ export const Header = styled.div`
   }
 `
 export const Body = styled.div`
-margin-top: 10px;
+  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px 15px;
@@ -27,8 +27,21 @@ margin-top: 10px;
     border-radius: 10px;
     width: 120px;
   }
-  p {
-    font-size: 16px;
+
+  .quantity-container {
+    display: flex;
+    gap: 20px;
+
+    button{
+      height: 30px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    p {
+    margin-top: 7px;
+  }
+  
   }
 `
 export const EmptyCart = styled.div`

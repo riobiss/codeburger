@@ -26,6 +26,16 @@ export const CartProvider = ({children}) => {
     )
   }
 
+  const increaseProducts = async ProductId => {
+    const newCart = cartProducts.map(product => {
+      return product.id === ProductId
+        ? {...product, quantity: product.quantity + 1}
+        : product
+    })
+
+    setCartProducts(newCart)
+    await localStorage.setItem("codeburguer:cartInfo", JSON.stringify(newCart))
+  }
   useEffect(() => {
     const loadCartData = async () => {
       const clientCartData = await localStorage.getItem("codeburguer:cartInfo")
@@ -39,7 +49,7 @@ export const CartProvider = ({children}) => {
   }, [])
 
   return (
-    <CartContext.Provider value={{putProductInCart, cartProducts}}>
+    <CartContext.Provider value={{putProductInCart, cartProducts, increaseProducts}}>
       {children}
     </CartContext.Provider>
   )

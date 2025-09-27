@@ -3,7 +3,7 @@ import {useCart} from "../../hooks/CartContext.jsx"
 import {Container, Header, Body, EmptyCart} from "./styles.jsx"
 import {formatCurrency} from "../../utils/formatCurrency.js"
 export function CartItems() {
-  const {cartProducts} = useCart()
+  const {cartProducts,increaseProducts} = useCart()
   return (
     <Container>
       <Header>
@@ -20,7 +20,11 @@ export function CartItems() {
             <img src={product.url} alt={product.name} />
             <p>{product.name}</p>
             <p>{formatCurrency(product.price)}</p>
+            <div className="quantity-container">
+              <button>-</button>
             <p>{product.quantity}</p>
+              <button onClick={()=> increaseProducts(product.id)}>+</button>
+            </div>
             <p>{formatCurrency(product.quantity * product.price)}</p>
           </Body>
         )
