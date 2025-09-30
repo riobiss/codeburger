@@ -1,26 +1,29 @@
 import React from "react"
 import Cart from "../../assets/cart.svg"
 import Person from "../../assets/person.svg"
+import { useNavigate, useLocation  } from "react-router-dom"
 
 import {Container, ContainerLeft, ContainerRight, PageLink, PageLinkExit, ContainerText, Line} from "./styles.jsx"
 
 export function Header() {
+const navigate = useNavigate()
+const  {pathname} = useLocation()
   return (
     <Container>
       <ContainerLeft>
-        <PageLink>Home</PageLink>
-        <PageLink>Ver Produtos</PageLink>
+        <PageLink onClick={()=> navigate("/")} $isActive={pathname === "/"}>Home</PageLink>
+        <PageLink onClick={()=> navigate("/produtos")} $isActive={pathname.includes("produtos")}>Ver Produtos</PageLink>
       </ContainerLeft>
       <ContainerRight>
         <PageLink>
-          <img className="Cart" src={Cart} alt="Carrinho" />
+          <img  onClick={()=> navigate("/carrinho")} className="Cart" src={Cart} alt="Carrinho" />
         </PageLink>
         <Line></Line>
         <PageLink>
           <img className="person" src={Person} alt="Conta do usuario" />
         </PageLink>
         <ContainerText>
-        <p>Ola, Riobis</p>
+        <p>Olá, Riobis</p>
         <PageLinkExit>Sair</PageLinkExit>
       </ContainerText>
       </ContainerRight>

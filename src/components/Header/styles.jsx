@@ -31,8 +31,10 @@ cursor: pointer;
 export const PageLink = styled.a`
 cursor: pointer;
 text-decoration: none;
-color: #555555;
+color: ${props => (props.$isActive ? '#814b8f' : '#555555')};
+font-weight: ${props => (props.$isActive ? 'bolder' : "normal")};
 line-height: 19px;
+
 `
 export const Line = styled.div`
 height: 40px;
