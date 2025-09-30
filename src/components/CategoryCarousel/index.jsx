@@ -65,7 +65,10 @@ export function CategoryCarousel() {
                 src={category.url}
                 alt={"Imagem da categoria de " + category.name}
               />
-              <Button>{category.name}</Button>
+              <Button
+              to='/produtos'
+              state={{categoryId: category.id}}
+            >{category.name}</Button>
             </ContainerItems>
           )
         })}
