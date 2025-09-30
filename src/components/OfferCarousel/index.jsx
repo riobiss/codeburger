@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react"
 import {useKeenSlider} from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
+import {useCart} from "../../hooks/CartContext.jsx"
 import OfferLogo from "../../assets/offers.svg"
-import { formatCurrency } from "../../utils/formatCurrency.js"
+import {formatCurrency} from "../../utils/formatCurrency.js"
+import {useNavigate} from "react-router-dom"
+
 import {
   Container,
   OfferImg,
@@ -15,14 +18,19 @@ import api from "../../services/api.js"
 
 export function OfferCarousel() {
   const [offers, setOffers] = useState([])
+  const {putProductInCart} = useCart()
+  const navigate = useNavigate()
+
   useEffect(() => {
     try {
       async function LoadOffers() {
         const {data} = await api.get("products")
 
-        const onlyOffers = data.filter(product => product.offer).map(item => {
-          return {...item, formatedPrice: formatCurrency(item.price)}
-        })
+        const onlyOffers = data
+          .filter(product => product.offer)
+          .map(item => {
+            return {...item, formatedPrice: formatCurrency(item.price)}
+          })
         setOffers(onlyOffers)
       }
 
@@ -69,8 +77,15 @@ export function OfferCarousel() {
                 alt={"Imagem da " + product.name + " em oferta"}
               />
               <p>{product.name}</p>
-              <p>{/* formatCurrency(product.price) */product.formatedPrice}</p>
-              <Button>Peça agora</Button>
+              <p>{/* formatCurrency(product.price) */ product.formatedPrice}</p>
+              <Button
+                onClick={() => {
+                  putProductInCart(product)
+                  navigate("/carrinho")
+                }}
+              >
+                Peça agora
+              </Button>
             </ContainerItems>
           )
         })}
