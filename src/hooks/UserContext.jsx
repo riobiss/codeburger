@@ -24,9 +24,12 @@ export const UserProvider = ({children}) => {
     //recupera os dados
   }, [])
 
+  const logout = async () => {
+    await localStorage.removeItem("codeburguer:userData")
+  }
 
   return (
-    <UserContext.Provider value={{putUserData, userData}}>
+    <UserContext.Provider value={{putUserData, userData, logout}}>
       {children}
     </UserContext.Provider>
   )
