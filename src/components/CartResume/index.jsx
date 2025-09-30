@@ -19,6 +19,9 @@ export function CartResume() {
   }, [cartProducts, deliveryTax])
 
   const submitOrder = async () => {
+    if(!finalPrice) {
+      return
+    }
     const order = cartProducts.map(product => {
       return {id: product.id, quantity: product.quantity}
     })
