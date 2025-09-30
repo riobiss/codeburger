@@ -8,6 +8,7 @@ import {Container, ContainerLeft, ContainerRight, PageLink, PageLinkExit, Contai
 export function Header() {
 const navigate = useNavigate()
 const  {pathname} = useLocation()
+const {name} = JSON.parse(localStorage.getItem("codeburguer:userData"))
   return (
     <Container>
       <ContainerLeft>
@@ -23,7 +24,7 @@ const  {pathname} = useLocation()
           <img className="person" src={Person} alt="Conta do usuario" />
         </PageLink>
         <ContainerText>
-        <p>Olá, Riobis</p>
+        <p>Olá, {name}</p>
         <PageLinkExit>Sair</PageLinkExit>
       </ContainerText>
       </ContainerRight>
