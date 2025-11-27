@@ -2,4 +2,5 @@ export * from "./Home"
 export * from "./Login"
 export * from "./Register"
 export * from "./Products"
-export * from './Cart'
+export * from "./Cart"
+export * from "./Admin"

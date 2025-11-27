@@ -5,10 +5,14 @@ const apiCodeBurguer = axios.create({
 })
 
 apiCodeBurguer.interceptors.request.use(async config => {
-  const userData = await localStorage.getItem("codeburguer:userData")
+  const userData = localStorage.getItem("codeburguer:userData")
   const token = userData && JSON.parse(userData).token
-  config.headers.authorization = `Bearer ${token}`
+  if (token) {
+    config.headers.authorization = `Bearer ${token}`
+  }
+
   return config
+
 })  
 
 export default apiCodeBurguer

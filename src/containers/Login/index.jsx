@@ -1,16 +1,16 @@
 import React from "react"
-import {useForm} from "react-hook-form"
-import {yupResolver} from "@hookform/resolvers/yup"
-import {Link, useNavigate} from "react-router-dom"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { Link, useNavigate } from "react-router-dom"
 import * as yup from "yup"
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 import api from "../../services/api"
-import {useUser} from "../../hooks/UserContext.jsx"
+import { useUser } from "../../hooks/UserContext.jsx"
 
 import LoginImg from "../../assets/login-image.svg"
 import Logo from "../../assets/logo.svg"
 
-import {Button} from "../../components/index.js"
+import { Button } from "../../components/index.js"
 
 import {
   Container,
@@ -25,7 +25,7 @@ import {
 export function Login() {
   const navigate = useNavigate()
 
-  const {putUserData} = useUser()
+  const { putUserData } = useUser()
   const schema = yup
     .object()
     .shape({
@@ -43,14 +43,14 @@ export function Login() {
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   })
 
   const onSubmit = async clientData => {
     try {
-      const {data} = await toast.promise(
+      const { data } = await toast.promise(
         api.post("sessions", {
           email: clientData.email,
           password: clientData.password,
@@ -65,7 +65,11 @@ export function Login() {
       putUserData(data)
 
       setTimeout(() => {
-        navigate("/")
+        if (data.admin) {
+          navigate("/pedidos")
+        } else {
+          navigate("/")
+        }
       }, 1000)
     } catch (err) {
       if (err.response?.status !== 401) {
@@ -97,14 +101,14 @@ export function Login() {
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
           <Button
             type="submit"
-            style={{marginTop: "75px", marginBottom: "25px"}}
+            style={{ marginTop: "75px", marginBottom: "25px" }}
           >
             Sign in
           </Button>
         </form>
         <SignInLink>
           Não possui conta?{" "}
-          <Link style={{color: "white"}} to="/cadastro">
+          <Link style={{ color: "white" }} to="/cadastro">
             Sign Up
           </Link>
         </SignInLink>

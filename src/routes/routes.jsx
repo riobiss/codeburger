@@ -1,7 +1,14 @@
 import React from "react"
-import {Routes, Route, BrowserRouter as Router} from "react-router-dom"
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom"
 
-import {Home, Login, Products, Register, Cart} from "../containers/index.js"
+import {
+  Home,
+  Login,
+  Products,
+  Register,
+  Cart,
+  Admin,
+} from "../containers/index.js"
 import PrivateRoute from "./private-route.jsx"
 
 export default function AppRoutes() {
@@ -31,6 +38,14 @@ export default function AppRoutes() {
           element={
             <PrivateRoute>
               <Cart />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="pedidos"
+          element={
+            <PrivateRoute isAdmin>
+              <Admin />
             </PrivateRoute>
           }
         />
