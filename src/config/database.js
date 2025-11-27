@@ -3,10 +3,11 @@ dotenv.config()
 
 export default {
   dialect: process.env.DIALECT,
-  host: process.env.HOST,
-  username: process.env.USERNAME,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
+  host: "localhost" | process.env.POSTGRES_HOST,
+  port: 5432,
+  username: process.env.POSTGRES_USERNAME,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
   define: {
     timestamps: true,
     underscored: true,
