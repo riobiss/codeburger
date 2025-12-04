@@ -1,0 +1,36 @@
+services:
+  api:
+    build: ./api
+    container_name: api
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./api/.env
+    depends_on:
+      - postgres
+      - mongo
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  mongo:
+    image: mongo:8
+    container_name: mongo_db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=senha123
+      - MONGO_INITDB_DATABASE=meubanco
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+volumes:
+  pgdata:
+  mongo_data:
