@@ -9,6 +9,7 @@ services:
     depends_on:
       - postgres
       - mongo
+    command: sh -c "npx sequelize-cli db:migrate && npm start"
   postgres:
     image: postgres:17-alpine
     container_name: postgres_db

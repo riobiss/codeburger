@@ -1,7 +1,7 @@
 "use strict"
 
 /** @type {import('sequelize-cli').Migration} */
-export default {
+module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn("products", "category_id", {
       //adiciona a coluna category_id na tabela products
