@@ -10,9 +10,24 @@ import TableRow from "@mui/material/TableRow"
 import Typography from "@mui/material/Typography"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
-import { ProductsImg } from "./styles"
+import { ProductsImg, ReactSelectStyle } from "./styles"
+import api from "../../../services/api"
+import { status } from "./ordersStatus"
+
 export default function Row({ row }) {
   const [open, setOpen] = React.useState(false)
+  const [isLoanding, setisLoading] = React.useState(false)
+
+  async function setStatus(id, status) {
+    setisLoading(true)
+    try {
+      await api.put(`orders/${id}`, { status })
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setisLoading(false)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -31,8 +46,20 @@ export default function Row({ row }) {
         </TableCell>
         <TableCell>{row.name}</TableCell>
         <TableCell>{row.date}</TableCell>
-        <TableCell>{row.status}</TableCell>
-        <TableCell></TableCell>
+        <TableCell>
+          <ReactSelectStyle
+            options={status}
+            menuPortalTarget={document.body}
+            placeholder="Status"
+            defaultValue={
+              status.find((item) => item.value === row.status) || null
+            }
+            onChange={(value) => {
+              setStatus(row.orderId, value.value)
+            }}
+            isLoading={isLoanding}
+          />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -47,7 +74,6 @@ export default function Row({ row }) {
                     <TableCell>Quantidade</TableCell>
                     <TableCell>Produto</TableCell>
                     <TableCell>Categoria</TableCell>
-                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -59,7 +85,10 @@ export default function Row({ row }) {
                       <TableCell>{productsRow.name}</TableCell>
                       <TableCell>{productsRow.category}</TableCell>
                       <TableCell>
-                        <ProductsImg src={productsRow.url} alt="imagem do produto" />
+                        <ProductsImg
+                          src={productsRow.url}
+                          alt={`Imagem do produto ${productsRow.name}`}
+                        />
                       </TableCell>
                     </TableRow>
                   ))}
@@ -72,4 +101,3 @@ export default function Row({ row }) {
     </React.Fragment>
   )
 }
-
