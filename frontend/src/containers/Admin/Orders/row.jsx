@@ -12,7 +12,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { ProductsImg, ReactSelectStyle } from "./styles"
 import api from "../../../services/api"
-import { status } from "./ordersStatus"
+import status from "./ordersStatus"
 
 export default function Row({ row }) {
   const [open, setOpen] = React.useState(false)
@@ -48,14 +48,14 @@ export default function Row({ row }) {
         <TableCell>{row.date}</TableCell>
         <TableCell>
           <ReactSelectStyle
-            options={status}
+            options={status.filter(status => status.id > 1)}
             menuPortalTarget={document.body}
             placeholder="Status"
             defaultValue={
               status.find((item) => item.value === row.status) || null
             }
-            onChange={(value) => {
-              setStatus(row.orderId, value.value)
+            onChange={(item) => {
+              setStatus(row.orderId, item.value)
             }}
             isLoading={isLoanding}
           />

@@ -7,11 +7,15 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { useEffect, useState } from "react"
 import api from "../../../services/api.js"
-import { Container } from "./styles"
+import { Container, Menu, LinkMenu } from "./styles"
 import Row from "./row.jsx"
 import { formatDate } from "../../../utils/formatDate.js"
+import status from "./ordersStatus.js"
 export default function Order() {
   const [orders, setOrders] = useState([])
+  const [filtered, setFiltered] = useState([])
+  const [activeStatus, setActiveStatus] = useState([])
+
   const [rows, setRows] = useState([])
 
   useEffect(() => {
@@ -19,6 +23,7 @@ export default function Order() {
       const { data } = await api.get("orders")
 
       setOrders(data)
+      setFiltered(data)
     }
     LoadOrders()
   }, [])
@@ -33,12 +38,33 @@ export default function Order() {
     }
   }
   useEffect(() => {
-    const newRows = orders.map((ord) => createData(ord))
+    const newRows = filtered.map((ord) => createData(ord))
     setRows(newRows)
-  }, [orders])
+  }, [filtered])
+
+  function handleStatus(status) {
+    if (status.id === 1) {
+      setFiltered(orders)
+    } else {
+      const newOrders = orders.filter((item) => item.status === status.value)
+      setFiltered(newOrders)
+    }
+    setActiveStatus(status.id)
+  }
 
   return (
     <Container>
+      <Menu>
+        {status?.map((status) => (
+          <LinkMenu
+            onClick={() => handleStatus(status)}
+            isActiveStatus={activeStatus === status.id}
+            key={status.id}
+          >
+            {status.label}
+          </LinkMenu>
+        ))}
+      </Menu>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <TableHead>
