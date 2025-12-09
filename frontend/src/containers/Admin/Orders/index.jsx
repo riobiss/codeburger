@@ -42,6 +42,22 @@ export default function Order() {
     setRows(newRows)
   }, [filtered])
 
+  useEffect(() => {
+    if (activeStatus === 1) {
+      setFiltered(orders)
+      return
+    } else {
+      const statusIndex = status.findIndex(
+        (status) => status.id === activeStatus
+      )
+      if (statusIndex === -1) return
+      const newFilteredOrders = orders.filter(
+        (order) => order.status === status[statusIndex].value
+      )
+      setFiltered(newFilteredOrders)
+    }
+  }, [orders, activeStatus])
+
   function handleStatus(status) {
     if (status.id === 1) {
       setFiltered(orders)
@@ -58,7 +74,7 @@ export default function Order() {
         {status?.map((status) => (
           <LinkMenu
             onClick={() => handleStatus(status)}
-            isActiveStatus={activeStatus === status.id}
+            $isActiveStatus={activeStatus === status.id}
             key={status.id}
           >
             {status.label}
@@ -78,7 +94,12 @@ export default function Order() {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <Row key={row.orderId} row={row} />
+              <Row
+                key={row.orderId}
+                row={row}
+                setOrders={setOrders}
+                orders={orders}
+              />
             ))}
           </TableBody>
         </Table>

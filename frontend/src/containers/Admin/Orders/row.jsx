@@ -14,14 +14,19 @@ import { ProductsImg, ReactSelectStyle } from "./styles"
 import api from "../../../services/api"
 import status from "./ordersStatus"
 
-export default function Row({ row }) {
+export default function Row({ row, orders, setOrders }) {
   const [open, setOpen] = React.useState(false)
   const [isLoanding, setisLoading] = React.useState(false)
 
   async function setStatus(id, status) {
     setisLoading(true)
+
     try {
       await api.put(`orders/${id}`, { status })
+      const newOrders = orders.map((order) => {
+        return order._id === id ? { ...order, status } : order
+      })
+      setOrders(newOrders)
     } catch (err) {
       console.error(err)
     } finally {
@@ -48,7 +53,7 @@ export default function Row({ row }) {
         <TableCell>{row.date}</TableCell>
         <TableCell>
           <ReactSelectStyle
-            options={status.filter(status => status.id > 1)}
+            options={status.filter((status) => status.value !== "Todos")}
             menuPortalTarget={document.body}
             placeholder="Status"
             defaultValue={
