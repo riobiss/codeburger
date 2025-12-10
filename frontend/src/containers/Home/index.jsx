@@ -1,4 +1,3 @@
-import React from "react"
 import HomeLogo from "../../assets/home-logo.svg"
 import {CategoryCarousel, OfferCarousel} from "../../components/index.js"
 import {Container, HomeImg} from "./styles.jsx"

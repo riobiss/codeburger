@@ -1,4 +1,3 @@
-import React from "react"
 import {useCart} from "../../hooks/CartContext.jsx"
 import {Container, Header, Body, EmptyCart} from "./styles.jsx"
 import {formatCurrency} from "../../utils/formatCurrency.js"

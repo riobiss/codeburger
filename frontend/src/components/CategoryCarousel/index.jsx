@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react"
-import {useKeenSlider} from "keen-slider/react"
+import { useEffect, useState } from "react"
+import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import CategoryLogo from "../../assets/categories-img.svg"
 import {
@@ -18,7 +18,7 @@ export function CategoryCarousel() {
   useEffect(() => {
     try {
       async function LoadCategories() {
-        const {data} = await api.get("categories")
+        const { data } = await api.get("categories")
         setCategories(data)
       }
 
@@ -31,19 +31,19 @@ export function CategoryCarousel() {
   const [sliderRef] = useKeenSlider({
     breakpoints: {
       "(min-width: 1px)": {
-        slides: {origin: "center", perView: 1.5, spacing: 5},
+        slides: { origin: "center", perView: 1.5, spacing: 5 },
       },
       "(min-width: 400px)": {
-        slides: {origin: "center", perView: 2.5, spacing: 10},
+        slides: { origin: "center", perView: 2.5, spacing: 10 },
       },
       "(min-width: 600px)": {
-        slides: {origin: "center", perView: 3.5, spacing: 20},
+        slides: { origin: "center", perView: 3.5, spacing: 20 },
       },
       "(min-width: 900px)": {
-        slides: {origin: "center", perView: 3.5, spacing: 40},
+        slides: { origin: "center", perView: 3.5, spacing: 40 },
       },
       "(min-width: 1300px)": {
-        slides: {origin: "center", perView: 4.5, spacing: 50},
+        slides: { origin: "center", perView: 4.5, spacing: 50 },
       },
     },
     loop: true,
@@ -58,17 +58,16 @@ export function CategoryCarousel() {
     <Container>
       <CategoryImg src={CategoryLogo} alt="Logo das Categorias" />
       <Carousel ref={sliderRef} className="keen-slider">
-        {categories.map(category => {
+        {categories.map((category) => {
           return (
             <ContainerItems className="keen-slider__slide" key={category.id}>
               <Image
                 src={category.url}
                 alt={"Imagem da categoria de " + category.name}
               />
-              <Button
-              to='/produtos'
-              state={{categoryId: category.id}}
-            >{category.name}</Button>
+              <Button to="/produtos" state={{ categoryId: category.id }}>
+                {category.name}
+              </Button>
             </ContainerItems>
           )
         })}

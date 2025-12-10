@@ -1,5 +1,3 @@
-import React from "react"
-
 import {Container, Image, ProductName, ProductPrice} from "./styles"
 import {Button} from "../index.js"
 import {useCart} from "../../hooks/CartContext.jsx"

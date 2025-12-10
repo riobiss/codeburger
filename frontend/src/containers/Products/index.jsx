@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react"
-import {useLocation} from "react-router-dom"
+import { useState, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import api from "../../services/api.js"
 import ProductsLogo from "../../assets/products-logo.svg"
 import {
@@ -9,11 +9,11 @@ import {
   CategoriesMenu,
   ProductsContainer,
 } from "./styles.jsx"
-import {CardProducts} from "../../components/index.js"
-import {formatCurrency} from "../../utils/formatCurrency.js"
+import { CardProducts } from "../../components/index.js"
+import { formatCurrency } from "../../utils/formatCurrency.js"
 
 export function Products() {
-  const {state} = useLocation()
+  const { state } = useLocation()
   let categoryId = 0
   if (state?.categoryId) {
     categoryId = state.categoryId
@@ -25,17 +25,17 @@ export function Products() {
 
   useEffect(() => {
     async function LoadCategories() {
-      const {data} = await api.get("categories")
+      const { data } = await api.get("categories")
 
-      const newCategories = [{id: 0, name: "Todos"}, ...data]
+      const newCategories = [{ id: 0, name: "Todos" }, ...data]
       setCategories(newCategories)
     }
 
     async function LoadProducts() {
-      const {data} = await api.get("products")
+      const { data } = await api.get("products")
 
-      const newAllproducts = data.map(product => {
-        return {...product, formatedPrice: formatCurrency(product.price)}
+      const newAllproducts = data.map((product) => {
+        return { ...product, formatedPrice: formatCurrency(product.price) }
       })
 
       setProducts(newAllproducts)
@@ -49,7 +49,7 @@ export function Products() {
       setFilteredProducts(products)
     } else {
       const newFilteredProducts = products.filter(
-        product => product.category_id === activeCategory
+        (product) => product.category_id === activeCategory
       )
 
       setFilteredProducts(newFilteredProducts)
@@ -61,7 +61,7 @@ export function Products() {
       <ProductImg src={ProductsLogo} alt="Logo do Home" />
       <CategoriesMenu>
         {categories &&
-          categories.map(category => {
+          categories.map((category) => {
             return (
               <CategoryButton
                 key={category.id}
@@ -77,7 +77,7 @@ export function Products() {
           })}
       </CategoriesMenu>
       <ProductsContainer>
-        {filteredProducts.map(product => {
+        {filteredProducts.map((product) => {
           return <CardProducts key={product.id} product={product} />
         })}
       </ProductsContainer>

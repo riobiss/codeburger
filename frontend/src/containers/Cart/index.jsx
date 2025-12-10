@@ -1,4 +1,3 @@
-import React from "react"
 import CartLogo from "../../assets/cart-img.svg"
 import {CartItems, CartResume} from '../../components/index.js'
 import {Container, CartImg, Wrapper} from "./styles.jsx"
