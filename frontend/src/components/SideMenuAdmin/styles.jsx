@@ -14,7 +14,7 @@ export const ItemContainer = styled.div`
   display: flex;
   height: 60px;
   align-items: center;
-  background-color: #565656;
+  background-color: ${props => props.isActive ? "#565656" : "none"};
   border-radius: 2px;
   margin: 8px;
   padding-left: 20px;
