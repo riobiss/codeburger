@@ -3,13 +3,13 @@ import LogoutIcon from "@mui/icons-material/Logout"
 import { useUser } from "../../hooks/UserContext.jsx"
 
 import listLinks from "./menu-list.js"
-export function SideMenuAdmin() {
+export default function SideMenuAdmin() {
   const { logout } = useUser()
   return (
     <Container>
       <hr />
       {listLinks.map((item) => (
-        <ItemContainer key={item.id} isActive={true}>
+        <ItemContainer key={item.id} $isActive={true}>
           <item.icon className="icon" />
           <ListLinks to={item.link}>{item.label}</ListLinks>
         </ItemContainer>
