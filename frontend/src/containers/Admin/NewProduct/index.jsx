@@ -1,5 +1,4 @@
-import { Container, Input, Label } from "./styles.jsx"
-import { Button } from "../../../components/Button"
+import { Container, Input, Label, ButtonStyled } from "./styles.jsx"
 import ReactSelect from "react-select"
 import api from "../../../services/api.js"
 import { useEffect } from "react"
@@ -12,12 +11,7 @@ export default function ListProducts() {
     }
     loadOrders()
   }, [])
-    const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm()
+  const { register } = useForm()
 
   return (
     <Container>
@@ -30,7 +24,7 @@ export default function ListProducts() {
         <Label>Upload da imagem</Label>
         <Input type="file" accept="image/png, image/jpeg" />
         <ReactSelect />
-        <Button>Adicionar produto </Button>
+        <ButtonStyled>Adicionar produto </ButtonStyled>
       </form>
     </Container>
   )
