@@ -1,6 +1,6 @@
 import {useCart} from "../../hooks/CartContext.jsx"
 import {Container, Header, Body, EmptyCart} from "./styles.jsx"
-import {formatCurrency} from "../../utils/formatCurrency.js"
+import formatCurrency from "../../utils/formatCurrency.js"
 export function CartItems() {
   const {cartProducts,increaseProducts, decreaseProducts} = useCart()
   return (

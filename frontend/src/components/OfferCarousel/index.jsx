@@ -3,7 +3,7 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import { useCart } from "../../hooks/CartContext.jsx"
 import OfferLogo from "../../assets/offers.svg"
-import { formatCurrency } from "../../utils/formatCurrency.js"
+import formatCurrency from "../../utils/formatCurrency.js"
 import { useNavigate } from "react-router-dom"
 
 import {

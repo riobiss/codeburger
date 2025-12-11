@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useCart } from "../../hooks/CartContext.jsx"
 import { Container } from "./styles.jsx"
 import { Button } from "../index.js"
-import { formatCurrency } from "../../utils/formatCurrency.js"
+import formatCurrency from "../../utils/formatCurrency.js"
 import api from "../../services/api.js"
 import { toast } from "react-toastify"
 

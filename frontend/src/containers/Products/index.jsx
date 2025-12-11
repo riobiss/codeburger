@@ -10,7 +10,7 @@ import {
   ProductsContainer,
 } from "./styles.jsx"
 import { CardProducts } from "../../components/index.js"
-import { formatCurrency } from "../../utils/formatCurrency.js"
+import formatCurrency from "../../utils/formatCurrency.js"
 
 export function Products() {
   const { state } = useLocation()
