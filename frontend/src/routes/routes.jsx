@@ -1,5 +1,5 @@
-import React from "react"
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom"
+import paths from "../constants/paths.js"
 
 import {
   Home,
@@ -15,10 +15,10 @@ export default function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/cadastro" element={<Register />} />
+        <Route path={paths.Login} element={<Login />} />
+        <Route path={paths.Register} element={<Register />} />
         <Route
-          path="/"
+          path={paths.Home}
           element={
             <PrivateRoute>
               <Home />
@@ -26,7 +26,7 @@ export default function AppRoutes() {
           }
         />
         <Route
-          path="/produtos"
+          path={paths.Products}
           element={
             <PrivateRoute>
               <Products />
@@ -34,7 +34,7 @@ export default function AppRoutes() {
           }
         />
         <Route
-          path="/carrinho"
+          path={paths.Cart}
           element={
             <PrivateRoute>
               <Cart />
@@ -42,7 +42,15 @@ export default function AppRoutes() {
           }
         />
         <Route
-          path="pedidos"
+          path={paths.Order}
+          element={
+            <PrivateRoute isAdmin>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.ListProducts}
           element={
             <PrivateRoute isAdmin>
               <Admin />
