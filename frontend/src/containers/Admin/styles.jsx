@@ -6,7 +6,7 @@ display: flex;
 min-height: 100vh;
 width: 100%;
 background-color: #efefef;
-gap: 100px;
+gap: 50px;
 `
 export const ContainerItems = styled.div`
 padding: 20px 0;
