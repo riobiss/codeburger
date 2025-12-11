@@ -14,7 +14,7 @@ export const ItemContainer = styled.div`
   display: flex;
   height: 60px;
   align-items: center;
-  background-color: ${props => props.isActive ? "#565656" : "none"};
+  background-color: ${(props) => (props.$isActive ? "#565656" : "none")};
   border-radius: 2px;
   margin: 8px;
   padding-left: 20px;
@@ -23,10 +23,10 @@ export const ItemContainer = styled.div`
   }
 `
 export const ListLinks = styled(Link)`
-font-style: normal; 
-font-weight: normal;
-line-height: 19px;
-color: white;
-text-decoration: none;
-margin-left: 10px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 19px;
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
 `
