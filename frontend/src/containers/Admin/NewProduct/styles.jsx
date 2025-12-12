@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import FileUploadIcon from "@mui/icons-material/FileUpload"
+
 import { Button } from "../../../components/Button"
 
 export const Container = styled.div`
@@ -27,8 +29,29 @@ export const Input = styled.input`
   border-radius: 8px;
   margin-bottom: 25px;
   width: 100%;
+  min-width: 250px;
 `
 export const ButtonStyled = styled(Button)`
   width: 100%;
   margin-top: 25px;
+`
+export const LabelUpload = styled.label`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px dashed white;
+  border-radius: 5px;
+  padding: 10px;
+  height: max-content;
+  margin-bottom: 25px;
+  
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+`
+export const FileUploadIconStyles = styled(FileUploadIcon)`
+
 `
