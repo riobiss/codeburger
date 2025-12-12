@@ -9,21 +9,25 @@ import {
 import ReactSelect from "react-select"
 import api from "../../../services/api.js"
 import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
+import { useForm, SubmitHandler, Controller } from "react-hook-form"
 
 export default function ListProducts() {
-  const [fileName, setFileName] = useState()
+  const { register, handleSubmit, control } = useForm()
+  const onSubmit = (data) => console.log(data)
+  const [fileName, setFileName] = useState(null)
+  const [categories, setCategories] = useState([])
+
   useEffect(() => {
-    async function loadOrders() {
-      const { data } = await api.get("products")
+    async function loadCategories() {
+      const { data } = await api.get("categories")
+      setCategories(data)
     }
-    loadOrders()
+    loadCategories()
   }, [])
-  const { register } = useForm()
 
   return (
     <Container>
-      <form noValidate>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
         {/* calaboca html */}
         <Label>Nome</Label>
         <Input type="text" {...register("name")} />
@@ -40,16 +44,29 @@ export default function ListProducts() {
           )}
           <input
             type="file"
+            id="image-input"
             accept="image/png, image/jpeg"
-            $isActive={true}
             {...register("file")}
             onChange={(value) => {
               setFileName(value.target.files[0]?.name)
             }}
           />
         </LabelUpload>
-
-        <ReactSelect />
+        <Controller
+          name="category_id"
+          control={control}
+          render={({ field }) => {
+            return (
+              <ReactSelect
+                {...field}
+                options={categories}
+                getOptionLabel={cat => cat.name}
+                getOptionValue={cat => cat.id}
+                placeholder="Categorias"
+              />
+            )
+          }}
+        ></Controller>
         <ButtonStyled>Adicionar produto </ButtonStyled>
       </form>
     </Container>
