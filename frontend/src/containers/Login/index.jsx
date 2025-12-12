@@ -10,7 +10,7 @@ import LoginImg from "../../assets/login-image.svg"
 import Logo from "../../assets/logo.svg"
 
 import { Button } from "../../components/index.js"
-
+import { ErrorMessage } from "../../components/index.js"
 import {
   Container,
   LoginImage,
@@ -18,7 +18,6 @@ import {
   Label,
   Input,
   SignInLink,
-  ErrorMessage,
 } from "./styles.jsx"
 
 export function Login() {

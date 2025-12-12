@@ -8,7 +8,7 @@ import api from "../../services/api.js"
 
 import RegisterImg from "../../assets/resgister-img.svg"
 import Logo from "../../assets/logo.svg"
-
+import { ErrorMessage } from "../../components/index.js"
 import {Button} from "../../components/index.js"
 import {
   Container,
@@ -17,7 +17,6 @@ import {
   Label,
   Input,
   SignInLink,
-  ErrorMessage,
 } from "./styles.jsx"
 
 export function Register() {
