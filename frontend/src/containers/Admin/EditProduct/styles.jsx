@@ -46,13 +46,21 @@ export const LabelUpload = styled.label`
   border-radius: 5px;
   padding: 10px;
   height: max-content;
-  
+
   input {
     opacity: 0;
     width: 0;
     height: 0;
   }
 `
-export const FileUploadIconStyles = styled(FileUploadIcon)`
-
+export const FileUploadIconStyles = styled(FileUploadIcon)``
+export const OfferInput = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  input{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
 `
