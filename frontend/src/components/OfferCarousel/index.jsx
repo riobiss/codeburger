@@ -15,6 +15,7 @@ import {
   Button,
 } from "./styles.jsx"
 import api from "../../services/api.js"
+import paths from "../../constants/paths.js"
 
 export function OfferCarousel() {
   const [offers, setOffers] = useState([])
@@ -81,7 +82,7 @@ export function OfferCarousel() {
               <Button
                 onClick={() => {
                   putProductInCart(product)
-                  navigate("/carrinho")
+                  navigate(paths.Cart)
                 }}
               >
                 Peça agora

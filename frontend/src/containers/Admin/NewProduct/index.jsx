@@ -13,10 +13,13 @@ import api from "../../../services/api.js"
 import { useEffect, useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
+import paths from "../../../constants/paths.js"
 export default function ListProducts() {
   const [fileName, setFileName] = useState(null)
   const [categories, setCategories] = useState([])
+  const navigate = useNavigate()
 
   const schema = Yup.object().shape({
     name: Yup.string()
@@ -40,6 +43,24 @@ export default function ListProducts() {
   } = useForm({
     resolver: yupResolver(schema),
   })
+
+  const onSubmit = async (data) => {
+    const productDataFormData = new FormData()
+    productDataFormData.append("name", data.name)
+    productDataFormData.append("price", data.price)
+    productDataFormData.append("category_id", data.category.id)
+    productDataFormData.append("file", data.file[0])
+
+    await toast.promise(api.post("products", productDataFormData), {
+      pending: "Criando novo produto",
+      success: "Produto criado com sucesso",
+      error: "Falha ao criar produto",
+    })
+    setTimeout(() => {
+      navigate(paths.ListProducts)
+    }, 2000)
+  }
+
   useEffect(() => {
     async function loadCategories() {
       const { data } = await api.get("categories")
@@ -47,8 +68,6 @@ export default function ListProducts() {
     }
     loadCategories()
   }, [])
-
-  const onSubmit = (data) => console.log(data)
 
   return (
     <Container>
@@ -77,7 +96,7 @@ export default function ListProducts() {
             <input
               type="file"
               id="image-input"
-              accept="image/png, image/jpeg"
+              accept="image/png, image/jpeg, image/jpg, image/svg"
               {...register("file")}
               onChange={(value) => {
                 setFileName(value.target.files[0]?.name)

@@ -19,6 +19,7 @@ import {
   Input,
   SignInLink,
 } from "./styles.jsx"
+import paths from "../../constants/paths.js"
 
 export function Login() {
   const navigate = useNavigate()
@@ -64,9 +65,9 @@ export function Login() {
 
       setTimeout(() => {
         if (data.admin) {
-          navigate("/pedidos")
+          navigate(paths.Order)
         } else {
-          navigate("/")
+          navigate(paths.Home)
         }
       }, 1000)
     } catch (err) {

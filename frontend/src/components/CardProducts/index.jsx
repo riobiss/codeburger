@@ -2,6 +2,7 @@ import {Container, Image, ProductName, ProductPrice} from "./styles"
 import {Button} from "../index.js"
 import {useCart} from "../../hooks/CartContext.jsx"
 import {useNavigate} from "react-router-dom"
+import paths from "../../constants/paths.js"
 
 export function CardProducts({product}) {
   const navigate = useNavigate()
@@ -15,7 +16,7 @@ export function CardProducts({product}) {
         <Button
           onClick={() => {
             putProductInCart(product)
-            navigate("/carrinho")
+            navigate(paths.Cart)
           }}
         >
           Adicionar

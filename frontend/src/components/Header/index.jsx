@@ -11,6 +11,7 @@ import {
   ContainerText,
   Line,
 } from "./styles.jsx"
+import paths from "../../constants/paths.js"
 
 export function Header() {
   const navigate = useNavigate()
@@ -20,17 +21,17 @@ export function Header() {
 
   const logoutUser = () => {
     logout()
-    navigate("/login")
+    navigate(paths.Login)
   }
 
   return (
     <Container>
       <ContainerLeft>
-        <PageLink onClick={() => navigate("/")} $isActive={pathname === "/"}>
+        <PageLink onClick={() => navigate(paths.Home)} $isActive={pathname === "/"}>
           Home
         </PageLink>
         <PageLink
-          onClick={() => navigate("/produtos")}
+          onClick={() => navigate(paths.Products)}
           $isActive={pathname.includes("produtos")}
         >
           Ver Produtos
@@ -39,7 +40,7 @@ export function Header() {
       <ContainerRight>
         <PageLink>
           <img
-            onClick={() => navigate("/carrinho")}
+            onClick={() => navigate(paths.Cart)}
             className="Cart"
             src={Cart}
             alt="Carrinho"
