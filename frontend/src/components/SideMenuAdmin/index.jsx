@@ -15,7 +15,7 @@ export default function SideMenuAdmin({ path }) {
           <ListLinks to={item.link}>{item.label}</ListLinks>
         </ItemContainer>
       ))}
-      <ItemContainer style={{ position: "absolute", bottom: "30px" }}>
+      <ItemContainer style={{ position: "fixed", bottom: "30px" }}>
         <LogoutIcon style={{ color: "white" }} />
         <ListLinks to={paths.Login} onClick={logout}>
           Sair

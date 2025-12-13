@@ -60,7 +60,7 @@ export default function EditProduct() {
     )
     setTimeout(() => {
       navigate(paths.ListProducts)
-    }, 2000)
+    }, 1000)
   }
 
   useEffect(() => {

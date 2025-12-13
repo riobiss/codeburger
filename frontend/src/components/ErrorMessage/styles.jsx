@@ -5,5 +5,5 @@ export const ErrorMessageStyles = styled.p`
   font-size: 14px;
   line-height: 16px;
 
-  color: #ad0000;
+  color: #ff0000;
 `

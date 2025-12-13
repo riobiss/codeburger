@@ -60,10 +60,7 @@ export function OfferCarousel() {
     },
     loop: true,
     mode: "snap",
-    range: {
-      min: -offers.length,
-      max: offers.length,
-    },
+    updated: offers.length > 0,
   })
 
   return (

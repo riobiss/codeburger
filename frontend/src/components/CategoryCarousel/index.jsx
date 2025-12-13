@@ -48,10 +48,7 @@ export function CategoryCarousel() {
     },
     loop: true,
     mode: "snap",
-    range: {
-      min: -categories.length,
-      max: categories.length,
-    },
+    updated: categories.length > 0,
   })
 
   return (
