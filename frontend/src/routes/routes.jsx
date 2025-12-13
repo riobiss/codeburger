@@ -65,6 +65,14 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         />
+        <Route
+          path={paths.EditProduct}
+          element={
+            <PrivateRoute isAdmin>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   )

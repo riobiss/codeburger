@@ -14,12 +14,14 @@ import { useEffect, useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import paths from "../../../constants/paths.js"
-export default function NewProduct() {
+export default function EditProduct() {
   const [fileName, setFileName] = useState(null)
   const [categories, setCategories] = useState([])
   const navigate = useNavigate()
+  const {location} = useLocation()
+  console.log(location)
 
   const schema = Yup.object().shape({
     name: Yup.string()

@@ -11,9 +11,12 @@ import Paper from "@mui/material/Paper"
 import CheckBoxIcon from "@mui/icons-material/CheckBox"
 import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined"
 import formatCurrency from "../../../utils/formatCurrency.js"
+import { useNavigate } from "react-router-dom"
+import paths from "../../../constants/paths.js"
 
 export default function ListProducts() {
   const [products, setProducts] = useState()
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function loadOrders() {
@@ -27,6 +30,9 @@ export default function ListProducts() {
       return <CheckBoxIcon style={{ color: "green" }} />
     }
     return <CheckBoxOutlineBlankOutlinedIcon style={{ color: "dark-red" }} />
+  }
+  function editProduct(product) {
+    navigate(paths.EditProduct, { state: { product } })
   }
   return (
     <Container>
@@ -59,7 +65,7 @@ export default function ListProducts() {
                   />
                 </TableCell>
                 <TableCell align="center">
-                  <EditIconStyles />
+                  <EditIconStyles onClick={() => editProduct(product)} />
                 </TableCell>
               </TableRow>
             ))}
